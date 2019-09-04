@@ -19,7 +19,7 @@ reader.open(fname)
 while(reader.hasEvent()) {
   def event = reader.getNextEvent()
   if (event.hasBank("REC::Particle") && event.hasBank("REC::Calorimeter")) {
-    def (ele, neu, km) = ENKm.getENKm(event)*.particle
+    def (ele, pro, km) = EPKm.getEPKm(event)*.particle
     if(ele!=null) {
       def eX = new Particle(beam)
       eX.combine(target, 1)
@@ -35,7 +35,7 @@ reader.close()
 }
 
 def out = new TDirectory()
-out.mkdir('/enkm')
-out.cd('/enkm')
+out.mkdir('/epkm')
+out.cd('/epkm')
 out.addDataSet(hmm2)
-out.writeFile('enkm_out.hipo')
+out.writeFile('epkm_out.hipo')
